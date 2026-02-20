@@ -1,143 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carlos Garcia</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --ink: #1c1f26;
+            --paper: #f5f4f0;
+            --accent: #3d5a80;
+            --accent-dark: #2b4058;
+            --accent-light: #e4ecf4;
+            --muted: #6c7180;
+            --border: #d2d0cb;
+            --warm-white: #fcfbf8;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Georgia, 'Times New Roman', serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #fafafa;
+            font-family: 'DM Sans', 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--ink);
+            background-color: var(--paper);
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: normal;
-            margin-bottom: 10px;
-            color: #222;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
+        /* --- NAV --- */
         nav {
-            margin-top: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--paper);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(8px);
         }
 
-        nav a {
-            color: #555;
+        nav .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav .nav-links a {
+            color: var(--muted);
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 1rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin: 0 14px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.2s;
         }
 
-        nav a:hover {
-            color: #000;
-            text-decoration: underline;
+        nav .nav-links a:hover {
+            color: var(--accent);
         }
 
-        main {
-            margin-bottom: 60px;
+        /* --- HERO --- */
+        .hero {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            font-weight: normal;
-            margin-bottom: 30px;
-            color: #222;
+        .hero-text h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 8px;
+            color: var(--ink);
         }
 
-        .blog-list {
-            list-style: none;
-        }
-
-        .blog-list li {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .blog-list li:last-child {
-            border-bottom: none;
-        }
-
-        .blog-list a {
-            color: #2563eb;
-            text-decoration: none;
+        .hero-text .tagline {
             font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 24px;
+            font-weight: 300;
         }
 
-        .blog-list a:hover {
-            text-decoration: underline;
+        .hero-text .about-body {
+            font-size: 1.02rem;
+            line-height: 1.85;
+            color: #3a3a4a;
+            margin-bottom: 28px;
         }
 
-        .blog-date {
-            color: #888;
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            letter-spacing: 0.03em;
+            transition: all 0.25s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-light);
+        }
+
+        /* Hero right - contact card */
+        .contact-card {
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 36px 32px;
+        }
+
+        .contact-card h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 24px;
+            color: var(--ink);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            row-gap: 18px;
+            align-items: baseline;
+        }
+
+        .contact-grid .label {
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .contact-grid .value {
+            font-size: 0.95rem;
+            color: var(--ink);
+        }
+
+        .contact-grid a {
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-grid a:hover {
+            color: var(--accent);
+        }
+
+        /* --- SECTIONS --- */
+        .section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .section+.section {
+            border-top: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 36px;
+            color: var(--ink);
+        }
+
+        /* --- EDUCATION --- */
+        .edu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .edu-school {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .edu-date {
             font-size: 0.9rem;
-            margin-top: 5px;
+            color: var(--muted);
         }
 
+        .edu-degree {
+            margin-top: 4px;
+            font-size: 1rem;
+            color: #3a3a4a;
+        }
+
+        .edu-gpa {
+            margin-top: 2px;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        /* --- SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .skill-group {
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 24px;
+        }
+
+        .skill-group h4 {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--accent-light);
+            color: var(--ink);
+            font-size: 0.84rem;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-weight: 400;
+        }
+
+        /* --- BLOG --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .blog-card {
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 24px 28px;
+            text-decoration: none;
+            color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .blog-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 12px rgba(61, 90, 128, 0.1);
+        }
+
+        .blog-card .blog-week {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .blog-card .blog-snippet {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .blog-card .blog-date {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+
+        /* --- FOOTER --- */
         footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 30px 24px;
+            border-top: 1px solid var(--border);
             text-align: center;
-            color: #888;
-            font-size: 0.9rem;
-            padding-top: 30px;
-            border-top: 1px solid #ddd;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding: 48px 24px 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav .nav-links a {
+                margin: 0 10px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>Carlos Garcia</h1>
-        <p class="subtitle">CSPB-3112 Project Blog</p>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="#blog">Blog</a>
-        </nav>
-    </header>
 
-    <main>
-        <section id="blog">
-            <h2>Weekly Updates</h2>
-            <ul class="blog-list">
-                <li>
-                    <a href="week4.html">Week 4</a>
-                </li>
-                <li>
-                    <a href="week3.html">Week 3</a>
-                </li>
-                <li>
-                    <a href="week2.html">Week 2</a>
-                </li>
-                <li>
-                    <a href="week1.html">Week 1</a>
-                </li>
-            </ul>
-        </section>
-    </main>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#blog">Blog</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero / About Me + Contact -->
+    <section class="hero" id="about">
+        <div class="hero-text">
+            <h1>Carlos Garcia</h1>
+            <p class="tagline">Computer Science · University of Colorado Boulder</p>
+            <p class="about-body">
+                Hello! I'm a curious and motivated computer science student at the University of Colorado in Boulder,
+                Colorado. I've built multiple projects ranging from a Connect 4 game to a Fake News Classifier utilizing
+                Google's BERT model. While in school, I've honed my skills through industry roles as an Automation
+                Developer at Fidelity Investments and a Software Verification Engineer at Allegion. I hope you enjoy
+                your time looking into my skills and experiences. Feel free to reach out!
+            </p>
+            <div class="hero-actions">
+                <a href="Resume_2026.pdf" class="btn btn-primary" download>Download Resume</a>
+                <a href="#blog" class="btn btn-outline">Read My Blog</a>
+            </div>
+        </div>
+        <div class="contact-card">
+            <h3>Get in Touch</h3>
+            <div class="contact-grid">
+                <span class="label">Location</span>
+                <span class="value">Denver, CO</span>
+
+                <span class="label">Email</span>
+                <a href="mailto:caga5719@colorado.edu" class="value">caga5719@colorado.edu</a>
+
+                <span class="label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/carlosgarcia2025" target="_blank" class="value">linkedin.com/in/carlosgarcia2025</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section" id="education">
+        <p class="section-label">Background</p>
+        <h2 class="section-title">Education</h2>
+        <div class="edu-row">
+            <span class="edu-school">University of Colorado Boulder</span>
+            <span class="edu-date">Aug 2022 – May 2026</span>
+        </div>
+        <p class="edu-degree">Bachelor of Science in Computer Science</p>
+        <p class="edu-gpa">GPA: 3.54</p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="section" id="skills">
+        <p class="section-label">Expertise</p>
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <h4>Languages</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Flask</span>
+                    <span class="skill-tag">Jinja2</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Groovy</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h4>Tools</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git / GitLab</span>
+                    <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Cypress</span>
+                    <span class="skill-tag">Datadog</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h4>Methods</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Agile / Scrum</span>
+                    <span class="skill-tag">CI/CD Pipelines</span>
+                    <span class="skill-tag">SDLC</span>
+                    <span class="skill-tag">Test Automation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Project Blog -->
+    <section class="section" id="blog">
+        <p class="section-label">CSPB-3112</p>
+        <h2 class="section-title">Course Project Blog</h2>
+        <div class="blog-grid">
+            <a href="week4.html" class="blog-card">
+                <div>
+                    <p class="blog-week">Week 4</p>
+                    <p class="blog-snippet">OSI model, TCP/IP, network topology drafting, and diving into the CCNA
+                        course with Packet Tracer labs.</p>
+                </div>
+                <p class="blog-date">February 12, 2026</p>
+            </a>
+            <a href="week3.html" class="blog-card">
+                <div>
+                    <p class="blog-week">Week 3</p>
+                    <p class="blog-snippet">Committed to the enterprise networking project. Researching IP addressing,
+                        subnetting, and mapping out the business scenario.</p>
+                </div>
+                <p class="blog-date">February 5, 2026</p>
+            </a>
+            <a href="week2.html" class="blog-card">
+                <div>
+                    <p class="blog-week">Week 2</p>
+                    <p class="blog-snippet">Exploring project directions — Arduino room mapping vs. networking. Getting
+                        familiar with Cisco Packet Tracer.</p>
+                </div>
+                <p class="blog-date">January 29, 2026</p>
+            </a>
+            <a href="week1.html" class="blog-card">
+                <div>
+                    <p class="blog-week">Week 1</p>
+                    <p class="blog-snippet">Kicking off the semester and beginning to outline project ideas for
+                        professional development.</p>
+                </div>
+                <p class="blog-date">January 22, 2026</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>CSPB-3112 Professional Development</p>
+        <p>Carlos Garcia · CSPB-3112 Professional Development · University of Colorado Boulder</p>
     </footer>
+
 </body>
+
 </html>
